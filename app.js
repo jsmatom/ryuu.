@@ -185,7 +185,6 @@ function renderSitePickCarousel() {
 
   container.innerHTML = `
     <div class="feature-shell">
-      <img class="feature-glow" src="${escapeAttribute(backdrop)}" alt="">
       <article class="feature feature-enter site-picks-feature" data-anime-id="${anime.id}" role="button" tabindex="0">
         <img class="feature-backdrop" src="${escapeAttribute(backdrop)}" alt="">
         <div class="feature-info">

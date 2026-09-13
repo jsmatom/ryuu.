@@ -109,17 +109,17 @@
 @keyframes lane-down { from { transform: translateY(-530px); } to { transform: translateY(0); } }
 .reduced-motion .activity-lane { animation-play-state: paused; }
 
-/* Zenshin glow: the blur is a second instance of the title's own artwork, never a flat colour. */
+/* Zenshin glow: the blur is a second instance of the title's own artwork, never a flat colour.
+   Banners (site picks / top airing / top anime sliders + detail hero) no longer carry this glow —
+   only the cover-card hover glow below remains, controlled by the Glow Effect setting. */
 .feature-shell { position: relative; isolation: isolate; padding: 14px 10px 20px; overflow: visible; }
-.feature-glow { position: absolute; z-index: -1; inset: 20px 28px 2px; width: calc(100% - 56px); height: calc(100% - 16px); object-fit: cover; opacity: .64; filter: blur(34px) brightness(.68) saturate(1.65); transform: scale(1.025); transition: opacity .28s ease; }
 .feature-shell .feature { position: relative; }
 .anime-card-art { position: relative; isolation: isolate; padding: 0 2px 8px; }
 .card-glow { position: absolute; z-index: -1; inset: 12px 8px 0; width: calc(100% - 16px); height: calc(100% - 8px); object-fit: cover; opacity: 0; filter: blur(20px) brightness(.72) saturate(1.8); transition: opacity .32s ease, transform .32s ease; transform: scale(.9); }
 .anime-card:hover .card-glow, .anime-card:focus-within .card-glow { opacity: .72; transform: scale(1.04); }
 .detail-hero { position: relative; isolation: isolate; padding: 18px 24px 30px; overflow: hidden; }
-.detail-banner-glow { position: absolute; z-index: -1; inset: 36px 7% 10px; width: 86%; height: 94%; object-fit: cover; opacity: .7; filter: blur(42px) brightness(.64) saturate(1.6); transform: scale(1.04); }
 .detail-hero .detail-banner { position: relative; }
-.no-glow .feature-glow, .no-glow .card-glow, .no-glow .detail-banner-glow { opacity: 0 !important; }
+.no-glow .card-glow { opacity: 0 !important; }
 .no-glow .anime-card:hover .anime-poster { box-shadow: 0 12px 26px #00000055; }
 .detail-fact { margin: 0 0 10px; color: #b9b7c0; font: .65rem/1.5 var(--mono); text-transform: capitalize; }
 .detail-fact b { display: inline-block; min-width: 58px; color: #e1dff0; font-weight: 500; }
@@ -154,7 +154,7 @@
 
 @media (max-width: 900px) { .landing-logo { width: min(630px, 105vw); height: 230px; transform: scale(1.25); } }
 @media (max-width: 700px) { .landing-logo { height: 205px; transform: scale(1.21); } }
-@media (max-width: 620px) { .detail-hero { padding: 12px 0 24px; }.detail-banner-glow { inset: 22px 8% 5px; }.episode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .detail-hero { padding: 12px 0 24px; }.episode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .anilist-auth { width: var(--header-box-height); min-width: var(--header-box-height); padding: 0; justify-content: center; }.anilist-auth .login-label { display: none; }.anilist-auth .login-icon { display: block; }.anilist-auth.is-connected { width: 58px; min-width: 58px; padding: 0 6px; gap: 6px; }.anilist-auth.is-connected span { display: none; } }
 
 /* The Electron settings page uses a simple rail title and flat #202022 cards. */
@@ -187,7 +187,6 @@
 #detail-content > .detail-hero { width: 100%; padding: 0 0 30px; overflow: visible; }
 .detail-hero .detail-banner { height: clamp(288px, 25vw, 384px); min-height: 288px; }
 .detail-hero .detail-banner::after { background: linear-gradient(0deg, var(--bg) 0%, #11111330 50%, transparent 100%), linear-gradient(90deg, #11111328, transparent 75%); }
-.detail-banner-glow { inset: 28px 6% 4px; width: 88%; height: calc(100% - 16px); opacity: .76; filter: blur(48px) brightness(.64) saturate(1.65); }
 .detail-layout { width: calc(100% - var(--page-gutter) * 2); grid-template-columns: clamp(160px, 18vw, 300px) minmax(0, 1fr); gap: clamp(16px, 2.5vw, 32px); margin: -64px auto 0; padding: 0; }
 .detail-poster { position: relative; z-index: 2; width: clamp(160px, 18vw, 300px); height: auto; aspect-ratio: 2/3; border-radius: 3px; box-shadow: 0 18px 42px #000000aa; }
 .detail-body { min-height: 336px; padding: clamp(46px, 6.5vw, 78px) 0 0; }
@@ -262,7 +261,6 @@ button.episode-row:hover { transform: translateX(2px); }
 .featured-section > .section-heading { display: none; }
 .featured-carousel { min-height: var(--carousel-h); }
 .featured-carousel .feature-shell { padding: 0; }
-.featured-carousel .feature-glow { inset: 18px 5%; width: 90%; height: calc(100% - 18px); opacity: .48; filter: blur(32px) brightness(.6) saturate(1.45); }
 .featured-carousel .feature { height: var(--carousel-h); border: 0; background: #141416; }
 .featured-carousel .feature::after { inset: 0 34% 0 0; background: linear-gradient(90deg, #141416, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); mask-image: linear-gradient(90deg, #000 30%, transparent 60%); -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent 60%); }
 .featured-carousel .feature-info { width: 46%; padding: clamp(20px, 2.5vw, 40px) var(--page-gutter); }
@@ -284,8 +282,8 @@ button.episode-row:hover { transform: translateX(2px); }
 .feature-shell:hover > .slider-arrow,.feature-shell:focus-within > .slider-arrow { opacity: 1; pointer-events: auto; }
 .top-anime-section { width: 100%; max-width: none; margin-right: 0; margin-left: 0; }.top-anime-section > .section-heading,.top-anime-section > .anime-grid,.top-anime-section > .home-infinite-loader { width: calc(100% - var(--page-gutter) * 2); margin-right: auto; margin-left: auto; }
 .top-airing-section { width: 100%; max-width: none; margin-right: 0; margin-left: 0; }.top-airing-section > .section-heading,.top-airing-section > .anime-grid { width: calc(100% - var(--page-gutter) * 2); margin-right: auto; margin-left: auto; }
-.top-anime-carousel { width: 100%; min-height: var(--carousel-h); margin: 0 0 28px; }.top-anime-section > .anime-grid { margin-top: 0; }.top-anime-carousel .feature-shell { padding: 0; }.top-anime-carousel .feature-glow { position: absolute; z-index: -1; inset: 18px 5%; width: 90%; height: calc(100% - 18px); object-fit: cover; opacity: .48; filter: blur(32px) brightness(.6) saturate(1.45); }.top-anime-carousel .feature { position: relative; height: var(--carousel-h); overflow: hidden; border: 0; background: #141416; cursor: pointer; }.top-anime-carousel .feature::before { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, #14141655, transparent 56%); }.top-anime-carousel .feature::after { content: ''; position: absolute; inset: 0 34% 0 0; background: linear-gradient(90deg, #141416, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); mask-image: linear-gradient(90deg, #000 30%, transparent 60%); -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent 60%); }.top-anime-carousel .feature-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }.top-anime-carousel .feature-info { position: relative; z-index: 1; width: 46%; padding: clamp(20px, 2.5vw, 40px) var(--page-gutter); }.top-anime-carousel .feature-info h2 { max-width: 100%; font-size: clamp(1.3rem, 2.2vw, 1.9rem); }.top-anime-carousel .feature-native { margin: 4px 0 15px; color: #fff; font-size: .66rem; }.top-anime-carousel .feature-desc { display: -webkit-box; width: 100%; overflow: hidden; margin-bottom: 14px; color: #d3d1d6; font: .64rem/1.58 var(--mono); letter-spacing: .01em; -webkit-box-orient: vertical; -webkit-line-clamp: 5; }.top-anime-carousel .anime-stats { margin-bottom: 0; }.top-anime-carousel .anime-stats span { font-size: .58rem; }
-.top-airing-carousel { width: 100%; max-width: none; min-height: var(--carousel-h); margin: 0 0 28px; }.top-airing-carousel .feature-shell { width: 100%; max-width: none; padding: 0; }.top-airing-carousel .feature-glow { position: absolute; z-index: -1; inset: 18px 5%; width: 90%; height: calc(100% - 18px); object-fit: cover; opacity: .48; filter: blur(32px) brightness(.6) saturate(1.45); }.top-airing-carousel .feature { position: relative; width: 100%; max-width: none; height: var(--carousel-h); overflow: hidden; border: 0; background: #141416; cursor: pointer; }.top-airing-carousel .feature::before { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, #14141655, transparent 56%); }.top-airing-carousel .feature::after { content: ''; position: absolute; inset: 0 34% 0 0; background: linear-gradient(90deg, #141416, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); mask-image: linear-gradient(90deg, #000 30%, transparent 60%); -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent 60%); }.top-airing-carousel .feature-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }.top-airing-carousel .feature-info { position: relative; z-index: 1; width: 46%; padding: clamp(20px, 2.5vw, 40px) var(--page-gutter); }.top-airing-carousel .feature-info h2 { max-width: 100%; font-size: clamp(1.3rem, 2.2vw, 1.9rem); }.top-airing-carousel .feature-native { margin: 4px 0 15px; color: #fff; font-size: .66rem; }.top-airing-carousel .feature-desc { display: -webkit-box; width: 100%; overflow: hidden; margin-bottom: 14px; color: #d3d1d6; font: .64rem/1.58 var(--mono); letter-spacing: .01em; -webkit-box-orient: vertical; -webkit-line-clamp: 5; }.top-airing-carousel .anime-stats { margin-bottom: 0; }.top-airing-carousel .anime-stats span { font-size: .58rem; }
+.top-anime-carousel { width: 100%; min-height: var(--carousel-h); margin: 0 0 28px; }.top-anime-section > .anime-grid { margin-top: 0; }.top-anime-carousel .feature-shell { padding: 0; }.top-anime-carousel .feature { position: relative; height: var(--carousel-h); overflow: hidden; border: 0; background: #141416; cursor: pointer; }.top-anime-carousel .feature::before { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, #14141655, transparent 56%); }.top-anime-carousel .feature::after { content: ''; position: absolute; inset: 0 34% 0 0; background: linear-gradient(90deg, #141416, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); mask-image: linear-gradient(90deg, #000 30%, transparent 60%); -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent 60%); }.top-anime-carousel .feature-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }.top-anime-carousel .feature-info { position: relative; z-index: 1; width: 46%; padding: clamp(20px, 2.5vw, 40px) var(--page-gutter); }.top-anime-carousel .feature-info h2 { max-width: 100%; font-size: clamp(1.3rem, 2.2vw, 1.9rem); }.top-anime-carousel .feature-native { margin: 4px 0 15px; color: #fff; font-size: .66rem; }.top-anime-carousel .feature-desc { display: -webkit-box; width: 100%; overflow: hidden; margin-bottom: 14px; color: #d3d1d6; font: .64rem/1.58 var(--mono); letter-spacing: .01em; -webkit-box-orient: vertical; -webkit-line-clamp: 5; }.top-anime-carousel .anime-stats { margin-bottom: 0; }.top-anime-carousel .anime-stats span { font-size: .58rem; }
+.top-airing-carousel { width: 100%; max-width: none; min-height: var(--carousel-h); margin: 0 0 28px; }.top-airing-carousel .feature-shell { width: 100%; max-width: none; padding: 0; }.top-airing-carousel .feature { position: relative; width: 100%; max-width: none; height: var(--carousel-h); overflow: hidden; border: 0; background: #141416; cursor: pointer; }.top-airing-carousel .feature::before { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, #14141655, transparent 56%); }.top-airing-carousel .feature::after { content: ''; position: absolute; inset: 0 34% 0 0; background: linear-gradient(90deg, #141416, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); mask-image: linear-gradient(90deg, #000 30%, transparent 60%); -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent 60%); }.top-airing-carousel .feature-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }.top-airing-carousel .feature-info { position: relative; z-index: 1; width: 46%; padding: clamp(20px, 2.5vw, 40px) var(--page-gutter); }.top-airing-carousel .feature-info h2 { max-width: 100%; font-size: clamp(1.3rem, 2.2vw, 1.9rem); }.top-airing-carousel .feature-native { margin: 4px 0 15px; color: #fff; font-size: .66rem; }.top-airing-carousel .feature-desc { display: -webkit-box; width: 100%; overflow: hidden; margin-bottom: 14px; color: #d3d1d6; font: .64rem/1.58 var(--mono); letter-spacing: .01em; -webkit-box-orient: vertical; -webkit-line-clamp: 5; }.top-airing-carousel .anime-stats { margin-bottom: 0; }.top-airing-carousel .anime-stats span { font-size: .58rem; }
 .home-infinite-loader { display: flex; min-height: 62px; align-items: center; justify-content: center; gap: 9px; color: #a9a7af; font: .67rem var(--mono); }.home-infinite-loader[hidden] { display: flex !important; visibility: hidden; }.loading-spinner { width: 14px; height: 14px; border: 2px solid #77737f; border-top-color: #a89fff; border-radius: 50%; animation: ryuu-spin .75s linear infinite; }@keyframes ryuu-spin { to { transform: rotate(360deg); } }
 @media (max-width: 620px) { .slider-arrow { width: 32px; }.slider-arrow-prev { left: 0; }.slider-arrow-next { right: 0; }.top-anime-section > .section-heading,.top-anime-section > .anime-grid,.top-anime-section > .home-infinite-loader,.top-airing-section > .section-heading,.top-airing-section > .anime-grid { width: calc(100% - 32px); }.top-anime-carousel,.top-anime-carousel .feature,.top-airing-carousel,.top-airing-carousel .feature { min-height: clamp(280px, 44vw, 360px); height: clamp(280px, 44vw, 360px); }.top-anime-carousel .feature-info,.top-airing-carousel .feature-info { padding: clamp(18px, 3vw, 32px) clamp(16px, 3vw, 28px); }.top-anime-carousel .feature::after,.top-airing-carousel .feature::after { inset: 0; background: linear-gradient(90deg, #141416f8 0%, #141416c4 64%, #14141642 100%); backdrop-filter: none; -webkit-backdrop-filter: none; mask-image: none; -webkit-mask-image: none; } }
 
@@ -369,8 +367,8 @@ button.episode-row:hover { transform: translateX(2px); }
 /* ============================================================
    SITE PICKS SLIDESHOW
    Follows the same visual pattern as the featured / top-airing
-   carousels: full-bleed banner, blurred glow layer, frosted
-   left panel. The eyebrow shows "SITE PICK #N" in accent colour.
+   carousels: full-bleed banner, frosted left panel, and the same
+   stat-icon set. The eyebrow shows "SITE PICK #N" in accent colour.
    ============================================================ */
 
 /* Section wrapper — full bleed, no heading */
@@ -393,18 +391,6 @@ button.episode-row:hover { transform: translateX(2px); }
 
 /* feature-shell reset: no padding (matches top-airing-carousel) */
 .site-picks-carousel .feature-shell { padding: 0; }
-
-/* Atmospheric glow layer */
-.site-picks-carousel .feature-glow {
-  position: absolute;
-  z-index: -1;
-  inset: 18px 5%;
-  width: 90%;
-  height: calc(100% - 18px);
-  object-fit: cover;
-  opacity: .48;
-  filter: blur(32px) brightness(.6) saturate(1.45);
-}
 
 /* Feature card */
 .site-picks-carousel .feature {
