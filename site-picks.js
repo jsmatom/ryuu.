@@ -27,24 +27,24 @@ window.RYUU_SITE_PICKS = {
   // ── PRIMARY IDS ────────────────────────────────────────────
   // Up to 8 AniList anime IDs. Change freely.
   primaryIds: [
-    1535,    // Death Note
-    5114,    // Fullmetal Alchemist: Brotherhood
-    11061,   // Hunter x Hunter (2011)
-    16498,   // Attack on Titan
-    21459,   // My Hero Academia
-    101922,  // Demon Slayer: Kimetsu no Yaiba
-    113415,  // Jujutsu Kaisen
-    9253,    // Steins;Gate
+    171627,           // Chainsaw Man – The Movie: Reze Arc
+    21827,           // Violet Evergarden
+    142770,         // Suzume
+    16498,         // Attack on Titan
+    21459,        // My Hero Academia
+    101922,      // Demon Slayer: Kimetsu no Yaiba
+    113415,     // Jujutsu Kaisen
+    178788,    // Demon Slayer: Kimetsu no Yaiba Infinity Castle
   ],
 
   // ── FALLBACK IDS ───────────────────────────────────────────
   // Used (up to 5) when a primary ID returns no AniList data.
   fallbackIds: [
-    21,      // One Piece
-    20,      // Naruto
-    1,       // Cowboy Bebop
-    98478,   // Made in Abyss
-    15417,   // Sword Art Online
+    21,         // One Piece
+    20,        // Naruto
+    1,        // Cowboy Bebop
+    9253,    // Steins;Gate
+    1735,   // Naruto: Shippuden
   ],
 
 };
