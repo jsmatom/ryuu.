@@ -734,6 +734,26 @@ function createInfiniteScrollObserver(sentinelId, onIntersect) {
   return observer;
 }
 
+// IntersectionObserver only fires on enter/exit transitions. On a wide
+// viewport with many grid columns, a single page of results can render in
+// so few rows that the sentinel never gets pushed back out of the load
+// zone - it was already intersecting, stays intersecting, and since it
+// never "exits" there's nothing to re-trigger the callback for the next
+// page. The visible symptom is scrolling being fine on narrow/tall
+// screens but going quiet after one page on large/wide ones.
+//
+// Fix: after each load finishes, explicitly check whether the sentinel is
+// still inside the same load zone the observer watches, and if so, chain
+// another load immediately instead of waiting for a scroll event that may
+// never come. This naturally stops once hasNext is false or the content
+// has grown past the load zone.
+function sentinelStillInLoadZone(sentinelId) {
+  const sentinel = document.getElementById(sentinelId);
+  if (!sentinel) return false;
+  const marginPx = Math.max(480, Math.round(window.innerHeight * 0.9));
+  return sentinel.getBoundingClientRect().top <= window.innerHeight + marginPx;
+}
+
 let scrollObserverResizeTimer = null;
 window.addEventListener('resize', () => {
   clearTimeout(scrollObserverResizeTimer);
@@ -769,6 +789,7 @@ async function loadMoreTopAnime() {
     if (requestId === state.topAnimeRequestId) {
       state.topAnimeLoading = false;
       document.getElementById('top-anime-load-sentinel').hidden = true;
+      if (state.topAnimeHasNext && sentinelStillInLoadZone('top-anime-load-sentinel')) loadMoreTopAnime();
     }
   }
 }
@@ -987,6 +1008,7 @@ async function runAnilistBrowse(reset = false) {
     if (requestId === b.requestId) {
       b.loading = false;
       sentinel.hidden = true;
+      if (b.hasNext && sentinelStillInLoadZone('anilist-load-sentinel')) runAnilistBrowse(false);
     }
   }
 }
